@@ -1,0 +1,49 @@
+<div th:replace="fragment/header.html"></div>
+
+<div class="container mt-5">
+    <a class="btn btn-primary" th:href="@{/admin/redirectCreate}">Thêm mới</a>
+    <a class=" ml-2 btn btn-primary" th:href="@{/admin/thongke}">Thống kê</a>
+    <table class="table">
+        <th>
+            <tr>
+                <td>Name</td>
+                <td>Type</td>
+                <td>Image</td>
+                <td>Price</td>
+                <td>Ngày tạo</td>
+                <td>Người tạo</td>
+                <td>Số lượng</td>
+                <td>Trạng thái</td>
+                <td>Hành động</td>
+            </tr>
+        </th>
+        <tbody>
+        <tr th:each="item : ${Products}">
+            <td th:text="${item.getName()}"></td>
+            <td th:text="${item.getType() == 0 ? 'Mỳ' : item.getType() == 1 ? 'Cơm' : item.getType() == 2 ? 'Bim bim' : 'Nước uống'}"></td>
+            <td>
+                <img style="width: 100px; height: 100px" th:src="|@{/images/}${item.getImage()}|">
+            </td>
+            <td th:text="${item.getPrice()}"></td>
+            <td th:text="${item.getCraeteTime()}"></td>
+            <td th:text="${item.getCreateByUser()}"></td>
+            <td th:text="${item.getAmount() > 0 ? 'Còn hàng' : 'Hết hàng'}"></td>
+            <td>
+                <input disabled type="checkbox" name="mycheckbox" th:checked="${item.getStatus()} ? 'checked'">
+            </td>
+            <td>
+                <div class="d-flex">
+                    <form class="mr-2" method="get" th:action="|@{/admin/getProduct/}${item.getId()}|">
+                        <button class="btn btn-warning">Cập nhật</button>
+                    </form>
+                    <form method="get" th:action="|@{/admin/removeProduct/}${item.getId()}|">
+                        <button class="btn btn-danger">Xóa</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragment/footer.html"></div>

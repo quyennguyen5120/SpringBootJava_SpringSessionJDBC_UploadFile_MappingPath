@@ -1,0 +1,49 @@
+<div th:replace="fragment/header.html"></div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">MENU</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+                <a th:href="|@{/product/getByType/0}|" class="nav-link" href="#">Mỳ</a>
+            </li>
+            <li class="nav-item">
+                <a th:href="|@{/product/getByType/1}|" class="nav-link" href="#">Cơm</a>
+            </li>
+            <li class="nav-item">
+                <a th:href="|@{/product/getByType/2}|" class="nav-link" href="#">Bim bim</a>
+            </li>
+            <li class="nav-item">
+                <a th:href="|@{/product/getByType/3}|" class="nav-link" href="#">Nước uống</a>
+            </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+            <form method="post" th:action="@{/product/Search/}">
+                <input class="form-control mr-sm-2 mr-2" name="textSearch" type="text" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Search</button>
+            </form>
+            <a th:href="@{/product/redirectCart}" class="btn btn-outline-danger my-2 my-sm-0">Xem dỏ hàng</a>
+        </div>
+    </div>
+</nav>
+    <div class="container mt-5">
+        <div class="row card-group">
+            <div class="col-md-4 p-5" th:each="item :${Products}">
+                <div class="card">
+                    <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" th:src="|@{/images/}${item.getImage()}|" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center" th:text="${item.getName()}"></h5>
+                        <p class="card-text">Cái này ăn ngon nè múc đi</p>
+                        <div class="d-flex">
+                            <h6>Giá chỉ: </h6> <h5 style="color: orangered" th:text="${item.getPrice()}"></h5><h5> $</h5>
+                        </div>
+                        <p class="card-text"><small class="text-muted">Ngày tạo: </small><small class="text-muted" th:text="${item.getCraeteTime()}"></small></p>
+                        <a class="btn btn-info" th:href="|@{/product/addCart/}${item.getId()}"|>Thêm vào dỏ hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div th:replace="fragment/footer.html"></div>

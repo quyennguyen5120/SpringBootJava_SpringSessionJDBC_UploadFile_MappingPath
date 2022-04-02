@@ -1,0 +1,26 @@
+<div th:replace="fragment/header.html"></div>
+
+<div class="container mt-5">
+    <table class="table">
+        <th>
+            <tr>
+                <td>Tên sản phẩm</td>
+                <td>Tổng số lượng</td>
+                <td>Tổng giá</td>
+            </tr>
+        </th>
+        <tbody>
+            <tr th:each=" item : ${lstDto}">
+                <td th:text="${item.getName()}"></td>
+                <td th:text="${item.getAmount()}"></td>
+                <td th:text="${item.getPrice()}"></td>
+            </tr>
+            <tr>
+                <td colspan="1">Tổng tiền:</td>
+                <td colspan="2" th:text="${sumPrice}"></td> $
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragment/footer.html"></div>

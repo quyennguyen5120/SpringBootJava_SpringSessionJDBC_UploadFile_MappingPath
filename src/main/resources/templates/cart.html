@@ -1,0 +1,28 @@
+<div th:replace="fragment/header.html"></div>
+
+
+
+<div class="container mt-5">
+        <h1>Dỏ hàng nè</h1>
+        <table class="table">
+            <th>
+                <tr>
+                    <td>Name</td>
+                    <td>Type</td>
+                    <td>Image</td>
+                    <td>Price</td>
+                </tr>
+            </th>
+            <tbody>
+            <tr th:each="item : ${lstPro}">
+                <td th:text="${item.getName()}"></td>
+                <td th:text="${item.getType() == 0 ? 'Mỳ' : item.getType() == 1 ? 'Cơm' : item.getType() == 2 ? 'Bim bim' : 'Nước uống'}"></td>
+                <td>
+                    <img style="width: 100px; height: 100px" th:src="|@{/images/}${item.getImage()}|">
+                </td>
+                <td th:text="${item.getPrice()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<div th:replace="fragment/footer.html"></div>
